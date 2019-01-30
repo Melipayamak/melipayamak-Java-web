@@ -44,6 +44,19 @@ public class RestClient  { //implements WSBodyReadables, WSBodyWritables
         //);    
     }
 
+    public CompletionStage<WSResponse> SendByBaseNumber(String text, String to, int bodyId) {
+       
+       JsonNode json = Json.newObject()
+                    .put("username", username)
+                    .put("password", password)
+                    .put("text", text)
+                    .put("to", to)
+                    .put("bodyId", String.valueOf(bodyId));
+
+        return ws.url(baseRestUrl + "BaseServiceNumber").addHeader("Content-Type", "application/json")
+            .post(json);
+    }
+    
     public CompletionStage<WSResponse> GetDeliveries2(long recId) {
        
        JsonNode json = Json.newObject()
