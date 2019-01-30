@@ -67,6 +67,22 @@ public class SoapClient  { //implements WSBodyReadables, WSBodyWritables
      
         return ws.url(baseSoapUrl + _sendOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
     }
+    public CompletionStage<WSResponse> SendByBaseNumber(String[] text, String to, int bodyId) {
+        
+        String _text = "<string>" + String.join("</string><string>", text) + "</string>";
+
+        String _func = "SendByBaseNumber";
+      String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><text>" + _text + "</text><to>" + to + "</to><bodyId>" + bodyId + "</bodyId></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _sendOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+    public CompletionStage<WSResponse> SendByBaseNumber2(String text, String to, int bodyId) {
+        
+        String _func = "SendByBaseNumber2";
+      String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><text>" + text + "</text><to>" + to + "</to><bodyId>" + bodyId + "</bodyId></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _sendOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
     public CompletionStage<WSResponse> getMessages(int location, String from, int index, int count) {
 
         String _func = "getMessages";
