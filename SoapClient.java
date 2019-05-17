@@ -22,6 +22,7 @@ public class SoapClient  { //implements WSBodyReadables, WSBodyWritables
     private final String _scheduleOp = "schedule.asmx";
     private final String _ticketsOp = "tickets.asmx";
     private final String _usersOp = "users.asmx";
+    private final String _voiceOp = "voice.asmx";
 
     private String username, password;
 
@@ -788,5 +789,54 @@ public class SoapClient  { //implements WSBodyReadables, WSBodyWritables
      
         return ws.url(baseSoapUrl + _scheduleOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
 	}
+
+    // Voice API Operations
+    public CompletionStage<WSResponse> GetSendSMSWithSpeechTextStatus(int recId) {
+
+        String _func = "GetSendSMSWithSpeechTextStatus";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><recId>" + String.valueOf(recId) + "</recId></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+
+    public CompletionStage<WSResponse> SendBulkSpeechText(String title, String body, String receivers, String DateToSend, int repeatCount) {
+
+        String _func = "SendBulkSpeechText";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><title>" + title + "</title><body>" + body + "</body><receivers>" + receivers + "</receivers><DateToSend>" + DateToSend + "</DateToSend><repeatCount>" + String.valueOf(repeatCount) + "</repeatCount></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+
+    public CompletionStage<WSResponse> SendBulkVoiceSMS(String title, int voiceFileId, String receivers, String DateToSend, int repeatCount) {
+
+        String _func = "SendBulkVoiceSMS";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><title>" + title + "</title><voiceFileId>" + String.valueOf(voiceFileId) + "</voiceFileId><receivers>" + receivers + "</receivers><DateToSend>" + DateToSend + "</DateToSend><repeatCount>" + String.valueOf(repeatCount) + "</repeatCount></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+
+    public CompletionStage<WSResponse> SendSMSWithSpeechText(String smsBody, String speechBody, String from, String to) {
+
+        String _func = "SendSMSWithSpeechText";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><smsBody>" + smsBody + "</smsBody><speechBody>" + speechBody + "</speechBody><from>" + from + "</from><to>" + to + "</to></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+
+    public CompletionStage<WSResponse> SendSMSWithSpeechTextBySchduleDate(String smsBody, String speechBody, String from, String to, String scheduleDate) {
+
+        String _func = "SendSMSWithSpeechTextBySchduleDate";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><smsBody>" + smsBody + "</smsBody><speechBody>" + speechBody + "</speechBody><from>" + from + "</from><to>" + to + "</to><scheduleDate>" + scheduleDate + "</scheduleDate></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
+
+    public CompletionStage<WSResponse> UploadVoiceFile(String title, String base64StringFile) {
+
+        String _func = "UploadVoiceFile";
+        String wsReq = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><" + _func + " xmlns=\"http://tempuri.org/\"><username>" + username + "</username><password>" + password + "</password><title>" + title + "</title><base64StringFile>" + base64StringFile + "</base64StringFile></"+ _func +"></soap:Body></soap:Envelope>";
+     
+        return ws.url(baseSoapUrl + _voiceOp).setHeader("Content-Type", "text/xml; charset=utf-8").post(wsReq);
+    }
    
 }
